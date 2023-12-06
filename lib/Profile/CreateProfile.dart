@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,67 +22,169 @@ class _CreateProfileState extends State<CreateProfile> {
 
   XFile? _imageFile;
   final ImagePicker _picker = ImagePicker();
+
+  double labelFontSize = 15;
+  bool saveButtonEnabled = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         constraints: BoxConstraints.expand(),
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Color.fromARGB(255, 33, 37, 41),
-              Color.fromARGB(255, 33, 37, 41),
-              // Color.fromARGB(255, 250, 81, 20),
-              // Color.fromARGB(255, 253, 132, 116),
-              // Color.fromARGB(255, 240, 177, 185),
-              // Color.fromARGB(255, 212, 206, 212),
-              // Color.fromARGB(255, 202, 204, 171),
-              Colors.white,
-              Colors.white
-            ],
-            stops: [0.0, 0.18, 0.1801, 1.0],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          shape: BoxShape.rectangle,
+        color: Colors.white,
+        // decoration: const BoxDecoration(
+        //   gradient: LinearGradient(
+        //     colors: [
+        //       Color.fromARGB(255, 33, 37, 41),
+        //       Color.fromARGB(255, 33, 37, 41),
+        //       // Color.fromARGB(255, 250, 81, 20),
+        //       // Color.fromARGB(255, 253, 132, 116),
+        //       // Color.fromARGB(255, 240, 177, 185),
+        //       // Color.fromARGB(255, 212, 206, 212),
+        //       // Color.fromARGB(255, 202, 204, 171),
+        //       Colors.white,
+        //       Colors.white
+        //     ],
+        //     stops: [0.0, 0.18, 0.1801, 1.0],
+        //     begin: Alignment.topCenter,
+        //     end: Alignment.bottomCenter,
+        //   ),
+        //   shape: BoxShape.rectangle,
+        // ),
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height / 4.2,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color.fromARGB(255, 33, 37, 41),
+                        Color.fromARGB(255, 33, 37, 41),
+                        // Color.fromARGB(255, 250, 81, 20),
+                        // Color.fromARGB(255, 253, 132, 116),
+                        // Color.fromARGB(255, 240, 177, 185),
+                        // Color.fromARGB(255, 212, 206, 212),
+                        // Color.fromARGB(255, 202, 204, 171),
+                        Colors.white,
+                        Colors.white,
+                      ],
+                      stops: [0.0, 0.6, 0.6001, 1.0],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    shape: BoxShape.rectangle,
+                  ),
+                ),
+                Positioned.fill(
+                  top: MediaQuery.of(context).size.width / 10,
+                  child:
+                      Align(alignment: Alignment.center, child: imageProfile()),
+                )
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: ListView(
+                  children: <Widget>[
+                    profileBox(),
+                    nameTextfield(),
+                    surnameTextfield(),
+                    professionTextfield(),
+                    phone1Textfield(),
+                    phone2Textfield(),
+                    emailTextfield(),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text("*İşaretli alanların doldurulması zorunludur."),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    linkBox(),
+                    websiteTextfield(),
+                    linkedInTextfield(),
+                    InstagramTextfield(),
+                    XTextfield(),
+                    FacebookTextfield(),
+                    YoutubeTextfield(),
+                    SaveBoxButton(),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget profileBox() {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(
+          0.0, 0.0, MediaQuery.of(context).size.width / 1.5, 0.0),
+      child: Container(
+        height: 30,
+        color: Colors.black,
+        alignment: Alignment.centerLeft,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: ListView(
-            children: <Widget>[
-              imageProfile(),
-              SizedBox(
-                height: 20,
-              ),
-              nameTextfield(),
-              SizedBox(
-                height: 5,
-              ),
-              surnameTextfield(),
-              SizedBox(
-                height: 5,
-              ),
-              professionTextfield(),
-              SizedBox(
-                height: 5,
-              ),
-              phone1Textfield(),
-              SizedBox(
-                height: 5,
-              ),
-              phone2Textfield(),
-              SizedBox(
-                height: 5,
-              ),
-              emailTextfield(),
-              SizedBox(
-                height: 5,
-              ),
-              websiteTextfield(),
-            ],
+          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+          child: Text(
+            "PROFİL",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
           ),
         ),
       ),
+    );
+  }
+
+  Widget linkBox() {
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(
+          0.0, 0.0, MediaQuery.of(context).size.width / 1.5, 0.0),
+      child: Container(
+        height: 30,
+        color: Colors.black,
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+          child: Text(
+            "LİNKLER",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget SaveBoxButton() {
+    final VoidCallback? onPressed = saveButtonEnabled ? () {} : null;
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: FilledButton(
+        onPressed: onPressed,
+        style: FilledButton.styleFrom(
+          backgroundColor: Colors.black,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10))
+          )
+
+        ),
+        child: const Text(
+          'DEĞİŞİKLİKLERİ KAYDET',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+                fontWeight: FontWeight.w500, fontSize: 16, color: Colors.white),
+          )
+        )
     );
   }
 
@@ -89,14 +193,18 @@ class _CreateProfileState extends State<CreateProfile> {
       child: Stack(
         children: [
           CircleAvatar(
-            radius: 80.0,
-            backgroundImage: _imageFile == null
-                ? AssetImage("assets/pp.png")
-                : FileImage(File(_imageFile!.path)) as ImageProvider,
+            radius: 81,
+            backgroundColor: Color.fromARGB(255, 33, 37, 41),
+            child: CircleAvatar(
+              radius: 80.0,
+              backgroundImage: _imageFile == null
+                  ? AssetImage("assets/pp.png")
+                  : FileImage(File(_imageFile!.path)) as ImageProvider,
+            ),
           ),
           Positioned(
-            bottom: 20.0,
-            right: 20.0,
+            bottom: 22.0,
+            right: 22.0,
             child: InkWell(
               onTap: () {
                 showModalBottomSheet(
@@ -167,9 +275,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget nameTextfield() {
     return TextFormField(
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -188,14 +296,19 @@ class _CreateProfileState extends State<CreateProfile> {
         //   color: Colors.green,
         // ),
         labelText: "İsim*",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         // helperText: "İsim boş b",
         errorText: _nameErrorText,
+
         // hintText: "Your Name",
       ),
       onTap: () => {
         setState(() {
           _nameErrorText = null;
+          labelFontSize = 18;
         })
       },
     );
@@ -204,9 +317,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget surnameTextfield() {
     return TextFormField(
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -225,7 +338,10 @@ class _CreateProfileState extends State<CreateProfile> {
         //   color: Colors.green,
         // ),
         labelText: "Soyisim*",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: _surnameErrorText,
         hintText: "Soyadınız",
       ),
@@ -240,9 +356,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget professionTextfield() {
     return TextFormField(
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -261,7 +377,10 @@ class _CreateProfileState extends State<CreateProfile> {
         //   color: Colors.green,
         // ),
         labelText: "Görev",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: _professionErrorText,
         hintText: "Full Stack Developer",
       ),
@@ -277,9 +396,9 @@ class _CreateProfileState extends State<CreateProfile> {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -299,7 +418,10 @@ class _CreateProfileState extends State<CreateProfile> {
         // ),
 
         labelText: "Cep Telefonu 1*",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: _phoneErrorText,
         hintText: "0537 777 77 77",
       ),
@@ -315,9 +437,9 @@ class _CreateProfileState extends State<CreateProfile> {
     return TextFormField(
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -336,7 +458,10 @@ class _CreateProfileState extends State<CreateProfile> {
         //   color: Colors.green,
         // ),
         labelText: "Cep Telefonu 2",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: null,
         hintText: "0537 777 77 77",
       ),
@@ -346,9 +471,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget emailTextfield() {
     return TextFormField(
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -363,7 +488,10 @@ class _CreateProfileState extends State<CreateProfile> {
           width: 2,
         )),
         labelText: "E-mail*",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: _emailErrorText,
         hintText: "aa123@gmail.com",
       ),
@@ -378,9 +506,9 @@ class _CreateProfileState extends State<CreateProfile> {
   Widget websiteTextfield() {
     return TextFormField(
       decoration: InputDecoration(
-        border: UnderlineInputBorder(
+        enabledBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.teal,
+            color: Color.fromARGB(146, 33, 37, 41),
             width: 2,
           ),
         ),
@@ -399,9 +527,182 @@ class _CreateProfileState extends State<CreateProfile> {
         //   color: Colors.green,
         // ),
         labelText: "Website",
-        labelStyle: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
         errorText: null,
         hintText: "https://www.google.com/",
+      ),
+    );
+  }
+
+  Widget linkedInTextfield() {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(146, 33, 37, 41),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.orange,
+          width: 2,
+        )),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.red,
+          width: 2,
+        )),
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   color: Colors.green,
+        // ),
+        labelText: "LinkedIn",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
+        errorText: null,
+        hintText: "LinkedIn Kullanıcı Adınız",
+      ),
+    );
+  }
+
+  Widget InstagramTextfield() {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(146, 33, 37, 41),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.orange,
+          width: 2,
+        )),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.red,
+          width: 2,
+        )),
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   color: Colors.green,
+        // ),
+        labelText: "Instagram",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
+        errorText: null,
+        hintText: "Instagram Kullanıcı Adınız",
+      ),
+    );
+  }
+
+  Widget XTextfield() {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(146, 33, 37, 41),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.orange,
+          width: 2,
+        )),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.red,
+          width: 2,
+        )),
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   color: Colors.green,
+        // ),
+        labelText: "X",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
+        errorText: null,
+        hintText: "X Kullanıcı Adınız",
+      ),
+    );
+  }
+
+  Widget FacebookTextfield() {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(146, 33, 37, 41),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.orange,
+          width: 2,
+        )),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.red,
+          width: 2,
+        )),
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   color: Colors.green,
+        // ),
+        labelText: "Facebook",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
+        errorText: null,
+        hintText: "Facebook Kullanıcı Adınız",
+      ),
+    );
+  }
+
+  Widget YoutubeTextfield() {
+    return TextFormField(
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(146, 33, 37, 41),
+            width: 2,
+          ),
+        ),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.orange,
+          width: 2,
+        )),
+        errorBorder: UnderlineInputBorder(
+            borderSide: BorderSide(
+          color: Colors.red,
+          width: 2,
+        )),
+        // prefixIcon: Icon(
+        //   Icons.person,
+        //   color: Colors.green,
+        // ),
+        labelText: "Youtube",
+        labelStyle: TextStyle(
+            fontWeight: FontWeight.w700,
+            fontSize: labelFontSize,
+            color: Colors.black),
+        errorText: null,
+        hintText: "Youtube Kanalınız",
       ),
     );
   }
